@@ -41,6 +41,7 @@ void findContours(Mat image, int &x, int &y)
 bool find_object(my_id_robot::FindObjectOpenCV::Request  &req,
          my_id_robot::FindObjectOpenCV::Response &res)
 {
+  ROS_INFO("Got a call to find an Object");
   VideoCapture capture(0);
 
   if (!capture.isOpened())
@@ -72,7 +73,7 @@ bool find_object(my_id_robot::FindObjectOpenCV::Request  &req,
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "find_object_opencv");
+  ros::init(argc, argv, "find_object");
   ros::NodeHandle n;
 
   ros::ServiceServer service = n.advertiseService("my_id_robot", find_object);

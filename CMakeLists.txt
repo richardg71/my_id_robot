@@ -62,6 +62,8 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  /usr/local/include/sphinxbase
+  /usr/local/include/pocketsphinx
   /opt/opencv-4.1.0/include/opencv4
   )
 
@@ -74,17 +76,31 @@ target_link_libraries(
   ${OpenCV_LIBRARIES}  # opt/opencv-4.1.0/lib
   )
 
-add_executable(main_object src/main_object.cpp)
-target_link_libraries(main_object
+add_executable(main_opencv_object src/main_opencv_object.cpp)
+target_link_libraries(main_opencv_object
   ${catkin_LIBRARIES})
 #add_dependencies(find_object_opencv 
 #  ${{PROJECT_NAME}_EXPORTED_TARGETS}
 #  ${catkin_EXPORTED_TARGETS})
 
+add_executable(main_id_subscriber src/main_id_subscriber.cpp)
+target_link_libraries(main_id_subscriber ${catkin_LIBRARIES})
+#add_dependencies(main_subscriber my_robot_generate_messages_cpp)
+
+add_executable(id_continuous src/id_continuous.cpp)
+target_link_libraries(id_continuous
+  ${catkin_LIBRARIES}
+  pocketsphinx
+  sphinxbase
+  sphinxad
+  )
+#add_dependencies(continuous my_robot_generate_messages_cpp)
+
 install(
   TARGETS
+  main_id_subscriber
   find_object_opencv
-  main_object
+  main_opencv_object
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 
