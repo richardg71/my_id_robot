@@ -1,0 +1,18 @@
+<launch>
+  <node
+      pkg="my_id_robot"
+      exec="main_subscriber"
+      name="main"
+      />
+  <node
+      pkg="my_id_robot"
+      exec="voice_publisher"
+      name="voice"
+      output="screen"
+      />
+  <node
+      pkg="my_id_robot"
+      exec="servo_subscriber"
+      name="servo"
+      />
+</launch>
